@@ -78,20 +78,20 @@ function renderUploadFields() {
   const serviceNames = selectedServices.map(i => SERVICES[i].name);
   const needHairstyle = serviceNames.includes('Hairstyle Change'), needMakeup = serviceNames.includes('Makeup Application'), needBackground = serviceNames.includes('Background Change')||serviceNames.includes('Full Scene Replacement');
   if (isPhotoshoot) {
-    html += buildUploadBox('selfieInput','📸 Selfie (required)','camera') + buildUploadBox('fullInput','📸 Full Body (required)','user');
+    html += buildUploadBox('selfieInput','Selfie (required)','camera') + buildUploadBox('fullInput','Full Body (required)','user');
     // --- HAIRSTYLE DESCRIPTION NOW WITH (required) ---
     html += `<textarea class="finput" id="hairstyle1" placeholder="Describe desired hairstyle... (required)"></textarea>` + buildMakeupToggle('person1','Light Makeup');
-    for (let i=1; i<=outfitCount; i++) html += `<div style="border:1px solid var(--border-light); border-radius:16px; padding:15px; margin-bottom:15px;"><div style="color:var(--lemon); font-weight:700;">👗 Outfit ${i} (required)</div>` + buildUploadBox(`outfitInput1_${i}`,'Upload outfit','tshirt') + `<textarea class="finput" id="outfitDesc1_${i}" placeholder="Or describe outfit ${i}..."></textarea></div>`;
+    for (let i=1; i<=outfitCount; i++) html += `<div style="border:1px solid var(--border-light); border-radius:16px; padding:15px; margin-bottom:15px;"><div style="color:var(--lemon); font-weight:700;"><i class="fas fa-tshirt"></i> Outfit ${i} (required)</div>` + buildUploadBox(`outfitInput1_${i}`,'Upload outfit','tshirt') + `<textarea class="finput" id="outfitDesc1_${i}" placeholder="Or describe outfit ${i}..."></textarea></div>`;
     if (selectedPackage?.name.includes('PLATINUM')) html += `<textarea class="finput" id="vision" placeholder="Custom background / concept (Platinum)"></textarea>`;
     if (isCouple) {
-      html += `<hr style="border-color:var(--border-light); margin:25px 0;"><h3 style="color:var(--lemon);">Partner</h3>` + buildUploadBox('partnerSelfieInput','📸 Partner Selfie (required)','user') + buildUploadBox('partnerFullInput','📸 Partner Full Body (required)','user');
+      html += `<hr style="border-color:var(--border-light); margin:25px 0;"><h3 style="color:var(--lemon);">Partner</h3>` + buildUploadBox('partnerSelfieInput','Partner Selfie (required)','user') + buildUploadBox('partnerFullInput','Partner Full Body (required)','user');
       // --- PARTNER HAIRSTYLE ALSO (required) ---
       html += `<textarea class="finput" id="hairstyle2" placeholder="Partner's desired hairstyle... (required)"></textarea>` + buildMakeupToggle('person2','Light Makeup (Partner)');
-      for (let i=1; i<=outfitCount; i++) html += `<div style="border:1px solid var(--border-light); border-radius:16px; padding:15px; margin-bottom:15px;"><div style="color:var(--lemon); font-weight:700;">👗 Partner Outfit ${i} (required)</div>` + buildUploadBox(`outfitInput2_${i}`,'Upload outfit','tshirt') + `<textarea class="finput" id="outfitDesc2_${i}" placeholder="Or describe outfit ${i}..."></textarea></div>`;
+      for (let i=1; i<=outfitCount; i++) html += `<div style="border:1px solid var(--border-light); border-radius:16px; padding:15px; margin-bottom:15px;"><div style="color:var(--lemon); font-weight:700;"><i class="fas fa-tshirt"></i> Partner Outfit ${i} (required)</div>` + buildUploadBox(`outfitInput2_${i}`,'Upload outfit','tshirt') + `<textarea class="finput" id="outfitDesc2_${i}" placeholder="Or describe outfit ${i}..."></textarea></div>`;
     }
   } else {
-    html += buildUploadBox('selfieInput','📸 Image to Edit (required)','image');
-    if (serviceNames.includes('Outfit Change')) html += `<div style="border:1px solid var(--border-light); border-radius:16px; padding:15px; margin-bottom:15px;"><div style="color:var(--lemon); font-weight:700;">👗 Outfit (required)</div>` + buildUploadBox('outfitInput1_1','Upload outfit','tshirt') + `<textarea class="finput" id="outfitDesc1_1" placeholder="Or describe outfit..."></textarea></div>`;
+    html += buildUploadBox('selfieInput','Image to Edit (required)','image');
+    if (serviceNames.includes('Outfit Change')) html += `<div style="border:1px solid var(--border-light); border-radius:16px; padding:15px; margin-bottom:15px;"><div style="color:var(--lemon); font-weight:700;"><i class="fas fa-tshirt"></i> Outfit (required)</div>` + buildUploadBox('outfitInput1_1','Upload outfit','tshirt') + `<textarea class="finput" id="outfitDesc1_1" placeholder="Or describe outfit..."></textarea></div>`;
     if (needHairstyle) html += `<textarea class="finput" id="hairstyle1" placeholder="Describe desired hairstyle... (required)"></textarea>`;
     if (needMakeup) html += buildMakeupToggle('person1','Light Makeup');
     if (needBackground) html += `<textarea class="finput" id="vision" placeholder="Describe background/scene... (required)"></textarea>`;
@@ -104,7 +104,7 @@ function renderUploadFields() {
   if (document.getElementById('makeupToggle2')) document.getElementById('makeupToggle2').classList.remove('active');
 }
 function buildUploadBox(id, title, icon) { return `<div class="upload-box" onclick="document.getElementById('${id}').click()"><input type="file" id="${id}" accept="image/*" capture="environment" style="display:none;"><i class="fas fa-${icon}" style="font-size:24px; color:var(--lemon);"></i><div style="margin-top:8px;">${title}</div><div class="upload-check" style="color:var(--lemon); margin-top:5px; display:none;"><i class="fas fa-check-circle"></i> Ready</div><img id="preview_${id}" style="max-width:100%; border-radius:8px; margin-top:10px; display:none;"></div>`; }
-function buildMakeupToggle(person, label) { return `<div class="toggle-row" onclick="toggleMakeup('${person}')"><span>💄 ${label}</span><div class="toggle-switch" id="makeupToggle${person==='person1'?'1':'2'}"></div></div>`; }
+function buildMakeupToggle(person, label) { return `<div class="toggle-row" onclick="toggleMakeup('${person}')"><span><i class="fas fa-sparkles" style="color:var(--lemon); margin-right:8px;"></i> ${label}</span><div class="toggle-switch" id="makeupToggle${person==='person1'?'1':'2'}"></div></div>`; }
 window.toggleMakeup = function(person) { if (person==='person1'){ makeupEnabled.person1=!makeupEnabled.person1; document.getElementById('makeupToggle1').classList.toggle('active',makeupEnabled.person1); } else { makeupEnabled.person2=!makeupEnabled.person2; document.getElementById('makeupToggle2').classList.toggle('active',makeupEnabled.person2); } };
 function setupPreviews(isPhotoshoot, isCouple, outfitCount) { setupPreview('selfieInput'); if(isPhotoshoot){ setupPreview('fullInput'); if(isCouple){ setupPreview('partnerSelfieInput'); setupPreview('partnerFullInput'); } for(let p=1; p<=(isCouple?2:1); p++) for(let i=1; i<=outfitCount; i++) setupPreview(`outfitInput${p}_${i}`); } else if(document.getElementById('outfitInput1_1')) setupPreview('outfitInput1_1'); }
 function setupPreview(id) { const inp=document.getElementById(id); if(!inp)return; inp.addEventListener('change',e=>{ const f=e.target.files[0]; if(!f)return; uploadedFiles[id]=f; const preview=document.getElementById(`preview_${id}`), box=inp.closest('.upload-box'), check=box.querySelector('.upload-check'); const r=new FileReader(); r.onload=ev=>{ preview.src=ev.target.result; preview.style.display='block'; }; r.readAsDataURL(f); box.classList.add('filled'); if(check)check.style.display='block'; }); }
@@ -182,11 +182,45 @@ function initFeedbackCarousel() {
   });
 }
 
+// Immersive Scroll Logic
+function initImmersiveScroll() {
+  const containers = document.querySelectorAll('.immersive-container');
+  if (!containers.length) return;
+
+  window.addEventListener('scroll', () => {
+    if (!document.getElementById('home').classList.contains('active')) return;
+
+    const windowHeight = window.innerHeight;
+    
+    containers.forEach(container => {
+      const rect = container.getBoundingClientRect();
+      const stickyOffset = windowHeight * 0.15; // top: 15vh
+      const stickyHeight = windowHeight * 0.65; // height: 65vh
+      const scrollableDistance = rect.height - stickyHeight;
+      
+      let progress = (stickyOffset - rect.top) / scrollableDistance;
+      progress = Math.max(0, Math.min(progress, 0.99));
+      
+      const layers = container.querySelectorAll('.img-layer');
+      const activeIndex = Math.floor(progress * layers.length);
+      
+      layers.forEach((layer, index) => {
+        if (index === activeIndex) {
+          layer.classList.add('active');
+        } else {
+          layer.classList.remove('active');
+        }
+      });
+    });
+  }, { passive: true });
+}
+
 window.onload = function() {
   loadDraft();
   if (selectedPackage) document.getElementById('continuePkgBtn').disabled = false;
   setPkgType(currentPkgType);
   initFeedbackCarousel();
+  initImmersiveScroll();
 
   if (localStorage.getItem('pendingOrder')) {
     showToast('You have a pending order. Complete it when ready.', true);
